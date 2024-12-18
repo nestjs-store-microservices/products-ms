@@ -85,4 +85,20 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
       message: `Product with id: ${id} was deleted successfully.`,
     };
   }
+
+  async validateProducts(ids: string[]) {
+    ids = Array.from(new Set(ids));
+    const productsDB = await this.product.findMany({
+      where: { id: { in: ids } },
+    });
+
+    if (productsDB.length !== ids.length) {
+      throw new RpcException({
+        message: 'Some products were not found',
+        status: HttpStatus.BAD_REQUEST,
+      });
+    }
+
+    return productsDB;
+  }
 }
