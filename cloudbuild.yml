@@ -4,7 +4,7 @@ steps:
     args:
       - -c
       - |
-        docker build -t northamerica-south1-docker.pkg.dev/iron-radio-450121-s8/store-registry/store-products-ms -f dockerfile.prod --platform=linux/amd64 --build-arg ORDERS_DATABASE_URL=$$DATABASE_URL .
+        docker build -t northamerica-south1-docker.pkg.dev/iron-radio-450121-s8/store-registry/store-products-ms -f dockerfile.prod --platform=linux/amd64 --build-arg PRODUCTS_DATABASE_URL=$$DATABASE_URL .
     secretEnv: ['DATABASE_URL']
 
   - name: 'gcr.io/cloud-builders/docker'
